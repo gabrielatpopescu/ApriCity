@@ -1,4 +1,7 @@
 <script lang="ts">
+  import { auth } from '$lib/firebase.client';
+  import { signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
+  import { goto } from '$app/navigation';
   import { Label } from "$lib/components/ui/label/index.js";
   import { Input } from "$lib/components/ui/input/index.js";
   import { Button } from "$lib/components/ui/button/index.js";
@@ -10,8 +13,38 @@
     ...restProps
   } = $props();
   const id = $props.id();
+
+  let email = $state('');
+  let password = $state('');
+  let error = $state('');
+  let loading = $state(false);
+
+  async function handleSubmit(event: SubmitEvent) {
+    event.preventDefault();
+    loading = true;
+    error = '';
+    
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+      goto('/dashboard');
+    } catch (err: any) {
+      error = err.message;
+    } finally {
+      loading = false;
+    }
+  }
+
+  async function handleGoogleLogin() {
+    try {
+      const provider = new GoogleAuthProvider();
+      await signInWithPopup(auth, provider);
+      goto('/home');
+    } catch (err: any) {
+      error = err.message;
+    }
+  }
 </script>
-<form class={cn("flex flex-col gap-6", className)} bind:this={ref} {...restProps}>
+<form class={cn("flex flex-col gap-6", className)} onsubmit={handleSubmit} bind:this={ref} {...restProps}>
   <div class="flex flex-col items-center gap-2 text-center">
     <h1 class="text-2xl font-bold">Login to your account</h1>
     <p class="text-muted-foreground text-balance text-sm">
@@ -21,7 +54,13 @@
   <div class="grid gap-6">
     <div class="grid gap-3">
       <Label for="email-{id}" class="">Email</Label>
-      <Input id="email-{id}" type="email" placeholder="m@example.com" required class="" />
+      <Input 
+        id="email-{id}" 
+        type="email" 
+        placeholder="m@example.com" 
+        required 
+        bind:value={email} class=""
+      />
     </div>
     <div class="grid gap-3">
       <div class="flex items-center">
@@ -30,8 +69,16 @@
           Forgot your password?
         </a>
       </div>
-      <Input id="password-{id}" type="password" required class="" />
+      <Input 
+        id="password-{id}" 
+        type="password" 
+        required 
+        bind:value={password} class=""
+      />
     </div>
+    {#if error}
+      <p class="text-red-500 text-sm">{error}</p>
+    {/if}
     <div class="grid gap-6">
       <Button
     type="submit"
@@ -54,8 +101,10 @@
     <Button
     variant="outline"
     class="group relative w-full h-10 overflow-hidden rounded-xl border border-orange-400 bg-white text-sm font-semibold shadow-md transition-all duration-300 hover:scale-105 hover:shadow-orange-400/50"
-    disabled={false}
->
+    disabled={loading}
+    on:click={handleGoogleLogin}
+    type="button"
+  >
     <span
         class="absolute inset-0 -z-10 bg-gradient-to-r from-orange-400 via-red-400 to-yellow-400 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
     ></span>

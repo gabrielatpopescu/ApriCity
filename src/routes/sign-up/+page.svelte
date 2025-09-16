@@ -3,7 +3,9 @@
   import Label from '$lib/components/ui/SignupForm/Label.svelte';
   import Input from '$lib/components/ui/SignupForm/Input.svelte';
   import signupbg from '$lib/assets/signupbg.png';
-  import { supabase } from '$lib/supabaseClient';
+  import { auth } from '$lib/firebase.client';
+  import { createUserWithEmailAndPassword, updateProfile, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
+  import { goto } from '$app/navigation';
 
   let firstname = '';
   let lastname = '';
@@ -23,22 +25,26 @@
       return;
     }
 
-    const { data, error } = await supabase.auth.signUp({
-      email,
-      password,
-      options: {
-        data: {
-          first_name: firstname,
-          last_name: lastname
-        }
-      }
-    });
-
-    if (error) {
+    try {
+      const { user } = await createUserWithEmailAndPassword(auth, email, password);
+      await updateProfile(user, {
+        displayName: `${firstname} ${lastname}`
+      });
+      
+      successMessage = "Account created successfully!";
+      goto('/home');
+    } catch (error: any) {
       errorMessage = error.message;
-    } else {
-      successMessage = "Account created! Please check your email to confirm.";
-      console.log("User signed up:", data.user);
+    }
+  };
+
+  const handleGoogleSignup = async () => {
+    try {
+      const provider = new GoogleAuthProvider();
+      await signInWithPopup(auth, provider);
+      goto('/home');
+    } catch (error: any) {
+      errorMessage = error.message;
     }
   };
 </script>
@@ -106,6 +112,7 @@
 			<button
 				type="button"
 				class="group relative w-full h-10 overflow-hidden rounded-xl border border-orange-400 bg-white text-sm font-semibold text-black shadow-md transition-all duration-300 hover:scale-105 hover:shadow-orange-400/50"
+				on:click={handleGoogleSignup}
 			>
 				<span
 					class="absolute inset-0 -z-10 bg-gradient-to-r from-orange-400 via-red-400 to-yellow-400 opacity-0 transition-opacity duration-300 group-hover:opacity-100"

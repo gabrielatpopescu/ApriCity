@@ -8,11 +8,11 @@
 	import DataTable from "$lib/components/data-table.svelte";
 </script>
 
-<Sidebar.Provider
+<Sidebar.Provider class=""
 	style="--sidebar-width: calc(var(--spacing) * 72); --header-height: calc(var(--spacing) * 12);"
 >
 	<AppSidebar variant="inset" />
-	<Sidebar.Inset>
+	<Sidebar.Inset class="">
 		<SiteHeader />
 		<div class="flex flex-1 flex-col">
 			<div class="@container/main flex flex-1 flex-col gap-2">

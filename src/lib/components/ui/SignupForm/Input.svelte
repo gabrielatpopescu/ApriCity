@@ -6,6 +6,7 @@
   export let type: string = 'text';
   export let placeholder: string = '';
   export let id: string;
+  export let value: string = '';  // Add this for two-way binding support
 
   let visible = false;
 
@@ -44,8 +45,9 @@
   >
     <input
         {type}
-        id={id}
-        placeholder={placeholder}
+        {id}
+        {placeholder}
+        bind:value 
         class={cn(
             `w-full rounded-md border border-neutral-300 bg-gray-50 px-3 py-2 text-sm text-black 
             placeholder:text-neutral-400 shadow-input transition 

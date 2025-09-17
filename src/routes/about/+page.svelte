@@ -673,21 +673,22 @@
   import { CardHoverEffect } from '$lib/components/ui/CardHoverEffect/index';
 
 	const projects = [
-		{
+    {
 			title: 'Primary Customers',
-			description: 'Bucharest City Hall (Primăria Municipiului București) and Sector City Halls for strategic urban planning, environmental policies and local-level monitoring of noise, air, heat, and flooding risk.',
+			description: 'County councils, municipalities and town halls for strategic urban planning, environmental policies and local-level monitoring of noise, air, heat, and flooding risk.',
 			link: 'https://pmb.ro'
 		},
 		{
 			title: 'Target Market',
-			description:
+      description:
 				'Ministry of Environment, Waters and Forests, National Water Administration, National Meteorological Administration.',
 			link: 'https://mmediu.ro/en/'
 		},
+		
 		{
 			title: 'Future expansion',
 			description:
-				'NGOs and civic organizations interested in environmental issues, Other large Romanian cities (Cluj, Timișoara, Iași)',
+				'NGOs and civic organizations interested in environmental issues, Provide accurate city-focused data for large Romanian cities (Bucharest, Cluj, Timișoara, Iași).',
 			link: 'https://e-circular.org/wp-content/uploads/2020/Lista%20ONG-uri%20de%20mediu.pdf'
 		},
 		{
@@ -699,13 +700,13 @@
 		{
 			title: 'Competitive Advantages',
 			description:
-				'Unique multi-factor integration (noise + air + heat + flooding), Customized for Bucharest context, Scalable model for national replication.',
+				'Unique multi-factor integration, Romania currently relies on dispersed datasets and outdated platforms.',
 			link: '/about'
 		},
 		{
 			title: 'Market Trends and Context',
 			description:
-				'Public administrations are increasingly adopting digital tools for policy-making, driven by citizen pressure and EU mandates.',
+				'Municipalities are accelerating digital transformation, using data platforms to design policies that respond both to EU compliance requirements and growing citizen demands for transparency.',
 			link: '/home'
 		}
 	];
@@ -795,7 +796,7 @@
         </h1>
         <div class="w-24 h-1 bg-gradient-to-r from-orange-400 to-red-400 mx-auto mb-8 rounded-full"></div>
         <p class="text-xl md:text-xl text-white max-w-3xl mx-auto leading-">
-          Our project leverages advanced satellite imagery and urban sensing technologies to deliver a comprehensive view of city environments. By integrating flooding risk models, heat island detection, noise distribution metrics, and real-time air quality monitoring, the platform transforms complex geospatial data into actionable intelligence. Municipal leaders, infrastructure operators, and enterprise stakeholders can use these insights to anticipate risks, optimize resource allocation, and design evidence-based strategies that enhance resilience, sustainability, and citizen well-being.
+          Our project leverages advanced satellite imagery and urban sensing technologies to deliver a comprehensive, multi-dimensional, integrated view of city environments. Public administrations can use the insights provided to anticipate risks, optimize resource allocation, and design evidence-based strategies that enhance resilience, sustainability, and citizen well-being.
         </p>
       </div>
     </div>
@@ -808,10 +809,7 @@
           Our Mission
         </h2>
         <p class="text-lg text-gray-700 leading-relaxed mb-6">
-          Our mission is to empower cities with data-driven intelligence that improves quality of life for all residents. We are committed to building resilient, efficient, and citizen-centered cities that adapt to today’s challenges and prepare for tomorrow’s opportunities.
-        </p>
-        <p class="text-lg text-gray-700 leading-relaxed">
-          By combining satellite imagery, IoT sensing, and advanced analytics, we deliver actionable insights that help urban leaders anticipate risks, optimize infrastructure, and drive sustainable growth.
+          Our mission is to empower cities with data-driven intelligence that improves quality of life for all residents. We are committed to provide resilient, efficient, and citizen-centered data that adapt to today’s challenges and prepare for tomorrow’s opportunities.
         </p>
       </div>
     </div>
